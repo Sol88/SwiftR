@@ -293,8 +293,10 @@ open class SignalR: NSObject, SwiftRWebDelegate {
         }
     }
     
-    open func stop() {
-        runJavaScript("swiftR.connection.stop()")
+    open func stop(completion: ((Any?) -> ())? = nil) {
+        runJavaScript("swiftR.connection.stop()") { result in
+            completion?(result)
+        }
     }
     
     func shouldHandleRequest(_ request: URLRequest) -> Bool {
